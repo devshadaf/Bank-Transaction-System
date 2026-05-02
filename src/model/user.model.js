@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password must be required for Creating Bank Account"],
   },
   
-});
+},{timestamps:true});
 
 userSchema.pre("save", async function(){
     if(!this.isModified(password)) return

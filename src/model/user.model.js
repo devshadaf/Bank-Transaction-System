@@ -29,8 +29,7 @@ const userSchema = new mongoose.Schema({
 },{timestamps:true});
 
 userSchema.pre("save", async function(){
-    if(!this.isModified(password)) return
-
+    if(!this.isModified("password")) return
     this.password =await bcrypt.hash(this.password,10)
 } )
 
@@ -43,11 +42,6 @@ userSchema.methods.generateToken=function(){
       expiresIn: "3d",
     });
     return token
-}
-
-userSchema.methods.verifyToken=async function(token){
-    const decodedData = await jwt.verify(token, process.env.JWT_SECRET);
-    return decodedData;
 }
 
 const User=mongoose.model("User",userSchema)

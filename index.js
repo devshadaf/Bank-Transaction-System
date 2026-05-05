@@ -1,12 +1,17 @@
 const express= require("express");
-const dbConnect = require("./src/config/dbConnect");
 require("dotenv").config()
+var cookieParser = require("cookie-parser");
+const dbConnect = require("./src/config/dbConnect");
 
 const app=express()
 const Port = process.env.PORT;
 
 // Database Connection
 dbConnect()
+
+// Middlewares
+app.use(express.json())
+app.use(cookieParser())
 
 // Routes
 app.get("/",(req,res)=>{

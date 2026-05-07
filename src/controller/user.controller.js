@@ -13,7 +13,7 @@ const handleSignUp = async(req, res) => {
         const user = await User.create({ name, email, password });
         const token = await user.generateToken()
         res.cookie("token", token, { expires : new Date(Date.now() +7*24*60*60*1000)});
-        await accountCreateEmail(user.email)
+         accountCreateEmail(user.email)
         res.status(201).json({
           message: "Bank Account Created Succesfully. Check your Email for Further Information.",
           data: user,
@@ -28,7 +28,7 @@ const handleSignUp = async(req, res) => {
 const handleLogin = async(req, res) => {
       const { email, password } = req.body;
       try {
-        const isExitUser=await User.findOne({email})
+        const isExitUser=await User.findOne({email}).select("+password")
         if(!isExitUser){
           return res.status(400).json({
             message: "Email Doesn't exit on our Bank",

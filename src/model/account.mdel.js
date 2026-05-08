@@ -15,10 +15,7 @@ const accountSchema = new mongoose.Schema({
   },
   balance:{
     type:Number,
-  },
-  created:{
-    type:Date,
-    default:Date.now
+    default:0
   }
 },{timestamps:true});
 

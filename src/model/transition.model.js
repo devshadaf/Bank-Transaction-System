@@ -12,13 +12,9 @@ const transitionSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    ammount: {
+    amount: {
       type: Number,
       required: true,
-    },
-    transitionType: {
-      type: String,
-      enum: ["Credit", "Debit"],
     },
     status: {
       type: String,
